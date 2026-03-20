@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>纯线上搭建的网站</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 100px;
+            font-family: Arial;
+            color: #333;
+        }
+        h1 {
+            color: #6366f1; /* Render 主题色 */
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 恭喜！纯线上搭建网站成功</h1>
+    <p>这个网站全程在浏览器操作，没有用任何本地软件</p>
+    <p>域名：<a href="#" id="domain"></a></p>
+    <script>
+        // 显示当前访问域名
+        document.getElementById('domain').textContent = window.location.href;
+    </script>
+</body>
+</html>

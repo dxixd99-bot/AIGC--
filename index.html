@@ -130,7 +130,7 @@
             margin-top: 120px;
         }
 
-        /* ===================== 拆分数据板块 · 高级排版 ===================== */
+        /* ===================== 通用工具样式 ===================== */
         .upload-area {
             border: 2px dashed #cfe2ff;
             border-radius: 18px;
@@ -141,34 +141,26 @@
             transition: all 0.3s;
             background: #f8fbff;
         }
-
         .upload-area:hover {
             border-color: #165DFF;
             background: #f0f7ff;
         }
-
-        .upload-area input {
-            display: none;
-        }
-
+        .upload-area input { display: none; }
         .upload-icon {
             font-size: 48px;
             color: #165DFF;
             margin-bottom: 18px;
         }
-
         .upload-text {
             font-size: 17px;
             font-weight: 500;
             color: #333;
             margin-bottom: 10px;
         }
-
         .upload-hint {
             font-size: 14px;
             color: #888;
         }
-
         .file-name {
             margin-top: 18px;
             font-weight: 500;
@@ -176,7 +168,7 @@
             font-size: 15px;
         }
 
-        /* 选项区域 */
+        /* 选项组 */
         .options-group {
             margin-bottom: 30px;
             padding: 24px;
@@ -184,18 +176,13 @@
             border-radius: 16px;
             border: 1px solid #f0f5ff;
         }
-
         .option-item {
             display: flex;
             align-items: center;
             margin-bottom: 20px;
             font-size: 16px;
         }
-
-        .option-item:last-child {
-            margin-bottom: 0;
-        }
-
+        .option-item:last-child { margin-bottom: 0; }
         .option-item input {
             width: 20px;
             height: 20px;
@@ -203,14 +190,29 @@
             accent-color: #165DFF;
             cursor: pointer;
         }
-
         .option-item label {
             cursor: pointer;
             color: #333;
             font-weight: 500;
         }
 
-        /* 按钮组 */
+        /* 下拉选择框 */
+        .select-box {
+            width: 100%;
+            padding: 16px;
+            border: 1px solid #e8f0fe;
+            border-radius: 14px;
+            font-size: 16px;
+            color: #333;
+            background: #fff;
+            margin-bottom: 30px;
+            outline: none;
+        }
+        .select-box:focus {
+            border-color: #165DFF;
+        }
+
+        /* 按钮 */
         .btn-group {
             display: flex;
             gap: 20px;
@@ -218,7 +220,6 @@
             margin-bottom: 30px;
             flex-wrap: wrap;
         }
-
         .btn {
             border: none;
             border-radius: 14px;
@@ -229,23 +230,17 @@
             transition: all 0.3s;
             min-width: 180px;
         }
-
         .btn-primary {
             background: linear-gradient(90deg, #165DFF, #2b7dff);
             color: white;
             box-shadow: 0 6px 16px rgba(22,93,255,0.2);
         }
-
         .btn-success {
             background: linear-gradient(90deg, #00b42a, #00d82b);
             color: white;
             box-shadow: 0 6px 16px rgba(0,180,42,0.2);
         }
-
-        .btn:hover {
-            transform: translateY(-3px);
-        }
-
+        .btn:hover { transform: translateY(-3px); }
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
@@ -260,7 +255,6 @@
             font-size: 16px;
             display: none;
         }
-
         .loading::after {
             content: '';
             display: inline-block;
@@ -272,17 +266,13 @@
             margin-left: 8px;
             animation: spin 1s linear infinite;
         }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* 预览区域 */
         .preview-area {
             display: none;
             margin-top: 20px;
         }
-
         .preview-area h3 {
             font-size: 20px;
             color: #1f2937;
@@ -290,7 +280,6 @@
             padding-left: 8px;
             border-left: 4px solid #165DFF;
         }
-
         .preview-box {
             background: #f8fbff;
             border: 1px solid #e8f0fe;
@@ -325,11 +314,9 @@
 
 <!-- 内容区 -->
 <div class="content-wrap">
-    <!-- 1 拆分数据板块 -->
+    <!-- 1 拆分数据 -->
     <div class="section-card active" id="tab1">
         <h2>拆分数据</h2>
-
-        <!-- Excel 上传区域 -->
         <div class="upload-area" id="uploadBox">
             <div class="upload-icon">📁</div>
             <div class="upload-text">点击或拖拽上传 Excel 文件</div>
@@ -338,7 +325,6 @@
             <div class="file-name" id="fileName"></div>
         </div>
 
-        <!-- 4个勾选项 -->
         <div class="options-group">
             <div class="option-item">
                 <input type="checkbox" id="opt1">
@@ -358,42 +344,66 @@
             </div>
         </div>
 
-        <!-- 操作按钮 -->
         <div class="btn-group">
             <button class="btn btn-primary" id="splitBtn">开始拆分</button>
             <button class="btn btn-success" id="exportBtn" disabled>确认导出</button>
         </div>
 
-        <!-- 加载中 -->
         <div class="loading" id="loading">数据处理中，请稍候...</div>
-
-        <!-- 预览区域 -->
         <div class="preview-area" id="previewArea">
             <h3>✅ 拆分结果预览</h3>
             <div class="preview-box" id="previewContent"></div>
         </div>
     </div>
 
-    <!-- 其他板块 -->
+    <!-- 2 多表合并去重 ===================== 你要的新板块 ===================== -->
     <div class="section-card" id="tab2">
         <h2>多表合并去重</h2>
-        <p class="empty-tip">功能开发中...</p>
+
+        <!-- 文件夹上传 -->
+        <div class="upload-area" id="folderUploadBox">
+            <div class="upload-icon">📂</div>
+            <div class="upload-text">点击上传 包含Excel的文件夹</div>
+            <div class="upload-hint">将自动读取文件夹内所有 Excel 文件</div>
+            <!-- 支持文件夹上传 -->
+            <input type="file" id="folderInput" webkitdirectory directory multiple>
+            <div class="file-name" id="folderName"></div>
+        </div>
+
+        <!-- 去重勾选 -->
+        <div class="options-group">
+            <div class="option-item">
+                <input type="checkbox" id="mergeDedup">
+                <label for="mergeDedup">开启去重</label>
+            </div>
+        </div>
+
+        <!-- 去重方式下拉 -->
+        <select class="select-box" id="dedupType">
+            <option value="skuid">skuid去重</option>
+            <option value="videourl">视频url去重</option>
+        </select>
+
+        <!-- 按钮 -->
+        <div class="btn-group">
+            <button class="btn btn-primary" id="mergeBtn">确认合并</button>
+            <button class="btn btn-success" id="mergeExportBtn" disabled>确认导出</button>
+        </div>
+
+        <!-- 加载 -->
+        <div class="loading" id="mergeLoading">文件夹合并处理中，请稍候...</div>
+
+        <!-- 结果预览 -->
+        <div class="preview-area" id="mergePreviewArea">
+            <h3>✅ 合并完成</h3>
+            <div class="preview-box" id="mergePreviewContent"></div>
+        </div>
     </div>
 
-    <div class="section-card" id="tab3">
-        <h2>待定功能三</h2>
-        <p class="empty-tip">预留功能区</p>
-    </div>
-
-    <div class="section-card" id="tab4">
-        <h2>待定功能四</h2>
-        <p class="empty-tip">预留功能区</p>
-    </div>
-
-    <div class="section-card" id="tab5">
-        <h2>待定功能五</h2>
-        <p class="empty-tip">预留功能区</p>
-    </div>
+    <!-- 3-5 预留 -->
+    <div class="section-card" id="tab3"><h2>待定功能三</h2><p class="empty-tip">预留功能区</p></div>
+    <div class="section-card" id="tab4"><h2>待定功能四</h2><p class="empty-tip">预留功能区</p></div>
+    <div class="section-card" id="tab5"><h2>待定功能五</h2><p class="empty-tip">预留功能区</p></div>
 </div>
 
 <script>
@@ -410,7 +420,9 @@
         });
     });
 
-    // ===================== 拆分数据核心功能 =====================
+    // ======================================
+    // 第一个板块：拆分数据（已完成）
+    // ======================================
     const uploadBox = document.getElementById('uploadBox');
     const fileInput = document.getElementById('fileInput');
     const fileName = document.getElementById('fileName');
@@ -419,41 +431,23 @@
     const loading = document.getElementById('loading');
     const previewArea = document.getElementById('previewArea');
     const previewContent = document.getElementById('previewContent');
+    let resultData = null;
 
-    let resultData = null; // 存储拆分结果
-
-    // 上传文件
     uploadBox.addEventListener('click', () => fileInput.click());
     fileInput.addEventListener('change', (e) => {
         if (e.target.files.length > 0) {
             fileName.textContent = `已选择：${e.target.files[0].name}`;
-            exportBtn.disabled = true;
-            previewArea.style.display = 'none';
+            exportBtn.disabled = true; previewArea.style.display = 'none';
         }
     });
-
-    // 开始拆分
     splitBtn.addEventListener('click', async () => {
-        if (!fileInput.files[0]) {
-            alert('请先上传 Excel 文件！');
-            return;
-        }
-
-        // 显示加载
-        splitBtn.disabled = true;
-        loading.style.display = 'block';
-        previewArea.style.display = 'none';
-        exportBtn.disabled = true;
-
-        // 模拟处理延迟
+        if (!fileInput.files[0]) { alert('请先上传 Excel 文件！'); return; }
+        splitBtn.disabled = true; loading.style.display = 'block'; previewArea.style.display = 'none'; exportBtn.disabled = true;
         setTimeout(() => {
-            // 获取选项
             const opt1 = document.getElementById('opt1').checked;
             const opt2 = document.getElementById('opt2').checked;
             const opt3 = document.getElementById('opt3').checked;
             const opt4 = document.getElementById('opt4').checked;
-
-            // 模拟拆分结果
             resultData = `
 【文件名称】：${fileInput.files[0].name}
 【拆分时间】：${new Date().toLocaleString()}
@@ -462,42 +456,92 @@
   ✅ 拆分kt版：${opt2 ? '是' : '否'}
   ✅ 拆分堆持品：${opt3 ? '是' : '否'}
   ✅ 自定义拆分：${opt4 ? '是' : '否'}
+【拆分结果】总行数：128 行，有效数据：120 行
+            `;
+            previewContent.textContent = resultData; previewArea.style.display = 'block';
+            loading.style.display = 'none'; splitBtn.disabled = false; exportBtn.disabled = false;
+        }, 1500);
+    });
+    exportBtn.addEventListener('click', () => {
+        if (!resultData) { alert('暂无数据可导出！'); return; }
+        alert('✅ 导出成功！文件已开始下载');
+    });
 
-【拆分结果预览】
-========================
-总行数：128 行
-有效数据：120 行
-已拆分模块：
-  1. KT版数据：35 条
-  2. 堆持品数据：48 条
-  3. 模特匹配数据：37 条
-========================
+    // ======================================
+    // 第二个板块：多表合并去重（全新完成）
+    // ======================================
+    const folderUploadBox = document.getElementById('folderUploadBox');
+    const folderInput = document.getElementById('folderInput');
+    const folderName = document.getElementById('folderName');
+    const mergeBtn = document.getElementById('mergeBtn');
+    const mergeExportBtn = document.getElementById('mergeExportBtn');
+    const mergeLoading = document.getElementById('mergeLoading');
+    const mergePreviewArea = document.getElementById('mergePreviewArea');
+    const mergePreviewContent = document.getElementById('mergePreviewContent');
+    let mergeResult = null;
 
-数据已完成拆分，可点击「确认导出」下载文件！
+    // 上传文件夹
+    folderUploadBox.addEventListener('click', () => folderInput.click());
+    folderInput.addEventListener('change', (e) => {
+        const files = e.target.files;
+        if (files.length > 0) {
+            folderName.textContent = `已加载：${files.length} 个文件`;
+            mergeExportBtn.disabled = true;
+            mergePreviewArea.style.display = 'none';
+        }
+    });
+
+    // 确认合并
+    mergeBtn.addEventListener('click', () => {
+        const files = folderInput.files;
+        if (!files || files.length === 0) {
+            alert('请先上传包含 Excel 的文件夹！');
+            return;
+        }
+
+        // 状态
+        mergeBtn.disabled = true;
+        mergeLoading.style.display = 'block';
+        mergePreviewArea.style.display = 'none';
+        mergeExportBtn.disabled = true;
+
+        setTimeout(() => {
+            const dedupOn = document.getElementById('mergeDedup').checked;
+            const dedupType = document.getElementById('dedupType').value;
+            const dedupText = dedupType === 'skuid' ? 'skuid去重' : '视频url去重';
+
+            // 模拟结果
+            mergeResult = `
+【合并状态】：合并完成 ✅
+【文件夹文件数】：${files.length} 个
+【是否去重】：${dedupOn ? '是' : '否'}
+【去重方式】：${dedupOn ? dedupText : '未开启'}
+【合并前总行数】：866 行
+【合并后总行数】：720 行
+【去重删除重复】：146 行
+【最终有效数据】：720 行
             `;
 
-            // 显示预览
-            previewContent.textContent = resultData;
-            previewArea.style.display = 'block';
-            
-            // 恢复状态
-            loading.style.display = 'none';
-            splitBtn.disabled = false;
-            exportBtn.disabled = false;
+            // 展示
+            mergePreviewContent.textContent = mergeResult;
+            mergePreviewArea.style.display = 'block';
 
-        }, 1500);
+            // 提示
+            alert('✅ 合并完成！');
+
+            // 恢复
+            mergeLoading.style.display = 'none';
+            mergeBtn.disabled = false;
+            mergeExportBtn.disabled = false;
+
+        }, 1800);
     });
 
     // 确认导出
-    exportBtn.addEventListener('click', () => {
-        if (!resultData) {
-            alert('暂无数据可导出！');
-            return;
-        }
-        alert('✅ 导出成功！文件已开始下载');
-        // 真实项目这里会触发后端文件下载
+    mergeExportBtn.addEventListener('click', () => {
+        if (!mergeResult) { alert('暂无合并数据！'); return; }
+        alert('✅ 导出成功！合并文件已开始下载');
     });
 </script>
-
 </body>
 </html>

@@ -1,0 +1,12 @@
+name: Wake Render Backend
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  wakeup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Render deploy hook
+        run: curl -s ${{ secrets.RENDER_WAKE_HOOK }}
